@@ -12,15 +12,24 @@ package com.projekt;
 public class CafeConfig {
 
     private static CafeConfig instance;
+    private final String cafeName; // final so it can not be change after initialization
 
     private CafeConfig() {
         // Private constructor to prevent instantiation
+        cafeName = "Jáva ☕"; // initialization
     }
 
     public static synchronized CafeConfig getInstance() {
+        // synchronized to make it thread-safe, so only one can access it at a time
         if (instance == null) {
+            //create new instance if it does not exist yet
             instance = new CafeConfig();
         }
         return instance;
+    }
+
+    public String getCafeName() {
+        // not static, because it works with instance variable cafeName
+        return cafeName;
     }
 }
